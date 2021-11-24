@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap");
+html {
+  --soft-blue: hsl(215, 51%, 70%);
+  --cyan: hsl(178, 100%, 50%);
+  --very-dark-blue-main: hsl(217, 54%, 11%);
+  --very-dark-blue-card: hsl(216, 50%, 16%);
+  --very-dark-blue-line: hsl(215, 32%, 27%);
+  --white: hsl(0, 0, 100%);
+  font-family: "Outfit", sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-bold: 600;
+  --font-size-heading: 2.2rem;
+  --font-size-body: 1.8rem;
+  --font-size-other: 1.5rem;
+  --line-height-heading: 2.8rem;
+  --line-height-body: 2.6rem;
+  --line-height-other: 1.9rem;
+  --overlay: 5;
+  --eye: 10;
+}
+
+body {
+  background: var(--very-dark-blue-main);
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 0;
+}
+
+.cards-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  max-width: 120rem;
+}
+
+.nft-card {
+  padding: 2.4rem;
+  background: var(--very-dark-blue-card);
+  border-radius: 1.5rem;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: start;
+  align-items: start;
+  gap: 2.4rem;
+  width: 90%;
+  max-width: 32.7rem;
+  transition: max-width 250ms ease;
+}
+@media only screen and (min-width: 768px) {
+  .nft-card {
+    max-width: 35rem;
+  }
+}
+
+.img-container {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  transition: max-width 250ms ease;
+  cursor: pointer;
+}
+.img-container img, .img-container::before {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+.img-container img.cube {
+  width: 100%;
+  height: 100%;
+}
+.img-container img.eye {
+  width: 4.4rem;
+  opacity: 0;
+  transition: opacity 250ms ease;
+  z-index: var(--eye);
+}
+.img-container:hover img.eye {
+  opacity: 1;
+}
+.img-container:hover::before {
+  opacity: 50%;
+}
+.img-container::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: var(--cyan);
+  z-index: var(--overlay);
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.text-container {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: start;
+  align-items: start;
+  gap: 1.2rem;
+}
+@media only screen and (min-width: 768px) {
+  .text-container {
+    gap: 1.6rem;
+  }
+}
+.text-container .heading {
+  color: white;
+  font-size: var(--font-size-heading);
+  line-height: var(--line-height-heading);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: color 250ms ease;
+}
+.text-container .heading:hover {
+  color: var(--cyan);
+}
+.text-container .description {
+  font-weight: var(--font-weight-light);
+  color: var(--soft-blue);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+.text-container .info-row {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.text-container .info-row > div {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: start;
+  align-items: center;
+  gap: 0.7rem;
+}
+.text-container .info-row .price p,
+.text-container .info-row .time-left p {
+  font-size: var(--font-size-other);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-other);
+}
+.text-container .info-row .price p {
+  color: var(--cyan);
+}
+.text-container .info-row .time-left p {
+  color: var(--soft-blue);
+}
+.text-container .divider {
+  width: 100%;
+  height: 0.1rem;
+  background: var(--very-dark-blue-line);
+}
+.text-container .user-info {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: start;
+  align-items: center;
+  gap: 1.6rem;
+}
+.text-container .user-info img {
+  width: 3.3rem;
+  border: 0.1rem solid white;
+  border-radius: 50%;
+}
+.text-container .user-info p {
+  line-height: var(--line-height-other);
+  font-size: var(--font-size-other);
+  font-weight: var(--font-weight-regular);
+  color: var(--soft-blue);
+}
+.text-container .user-info p a {
+  padding-left: 0.5rem;
+  color: white;
+  transition: color 250ms ease;
+}
+.text-container .user-info p a:hover {
+  color: var(--cyan);
+}
+
+.text-container > *:is(:not(:nth-child(1)), :not(:nth-last-child(1))) {
+  margin-bottom: 0.4rem;
+}
+@media only screen and (min-width: 768px) {
+  .text-container > *:is(:not(:nth-child(1)), :not(:nth-last-child(1))):is(:not(:nth-last-child(2))) {
+    margin-bottom: 0.8rem;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */

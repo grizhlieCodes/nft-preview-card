@@ -1,0 +1,201 @@
+@use "./mixins.scss" as *;
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap");
+
+html {
+  //Colors
+  --soft-blue: hsl(215, 51%, 70%);
+  --cyan: hsl(178, 100%, 50%);
+  --very-dark-blue-main: hsl(217, 54%, 11%);
+  --very-dark-blue-card: hsl(216, 50%, 16%);
+  --very-dark-blue-line: hsl(215, 32%, 27%);
+  --white: hsl(0, 0, 100%);
+
+  //Text
+  font-family: "Outfit", sans-serif;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-bold: 600;
+  --font-size-heading: 2.2rem;
+  --font-size-body: 1.8rem;
+  --font-size-other: 1.5rem;
+  --line-height-heading: 2.8rem;
+  --line-height-body: 2.6rem;
+  --line-height-other: 1.9rem;
+
+  //Z-index
+  --overlay: 5;
+  --eye: 10;
+}
+
+body {
+  background: v(very-dark-blue-main);
+  width: 100%;
+  min-height: 100vh;
+  @include center();
+  padding: 2rem 0;
+}
+
+.cards-container {
+  @include flex(row wrap, center, center);
+  gap: 2rem;
+  max-width: 120rem;
+}
+
+.nft-card {
+  padding: 2.4rem;
+  background: v(very-dark-blue-card);
+  border-radius: 1.5rem;
+  @include flex(column nowrap, start, start);
+  gap: 2.4rem;
+  width: 90%;
+  max-width: 32.7rem;
+  transition: max-width 250ms ease;
+
+  @include mq(tablet) {
+    max-width: 35rem;
+  }
+}
+
+.img-container {
+  width: 100%;
+  @include center();
+  border-radius: 0.8rem;
+  overflow: hidden;
+  transition: max-width 250ms ease;
+  cursor: pointer;
+
+  img,
+  &::before {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+
+  img.cube {
+    width: 100%;
+    height: 100%;
+  }
+
+  img.eye {
+    width: 4.4rem;
+    opacity: 0;
+    transition: opacity 250ms ease;
+    z-index: v(eye);
+  }
+
+  &:hover {
+    img.eye {
+      opacity: 1;
+    }
+
+    &::before {
+      opacity: 50%;
+    }
+  }
+
+  &::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: v(cyan);
+    z-index: v(overlay);
+    opacity: 0;
+    transition: opacity 250ms ease;
+  }
+}
+
+.text-container {
+  width: 100%;
+  @include flex(column nowrap, start, start);
+  gap: 1.2rem;
+
+  @include mq(tablet) {
+    gap: 1.6rem;
+  }
+
+  .heading {
+    color: white;
+    font-size: v(font-size-heading);
+    line-height: v(line-height-heading);
+    font-weight: v(font-weight-bold);
+    cursor: pointer;
+    transition: color 250ms ease;
+    &:hover {
+      color: v(cyan);
+    }
+  }
+
+  .description {
+    font-weight: v(font-weight-light);
+    color: v(soft-blue);
+    font-size: v(font-size-body);
+    line-height: v(line-height-body);
+  }
+
+  .info-row {
+    width: 100%;
+    @include flex(row nowrap, space-between, center);
+
+    > div {
+      @include flex(row nowrap, start, center);
+      gap: 0.7rem;
+    }
+
+    .price,
+    .time-left {
+      p {
+        font-size: v(font-size-other);
+        font-weight: v(font-weight-bold);
+        line-height: v(line-height-other);
+      }
+    }
+
+    .price p {
+      color: v(cyan);
+    }
+    .time-left p {
+      color: v(soft-blue);
+    }
+  }
+
+  .divider {
+    width: 100%;
+    height: 0.1rem;
+    background: v(very-dark-blue-line);
+  }
+
+    .user-info {
+    @include flex(row nowrap, start, center);
+    gap: 1.6rem;
+    img {
+      width: 3.3rem;
+      border: 0.1rem solid white;
+      border-radius: 50%;
+    }
+    p {
+      line-height: v(line-height-other);
+      font-size: v(font-size-other);
+      font-weight: v(font-weight-regular);
+      color: v(soft-blue);
+
+      a {
+        padding-left: 0.5rem;
+        color: white;
+        transition: color 250ms ease;
+        &:hover {
+          color: v(cyan);
+        }
+      }
+    }
+  }
+
+}
+
+.text-container > *:is(:not(:nth-child(1)), :not(:nth-last-child(1))) {
+  margin-bottom: 0.4rem;
+
+  @include mq(tablet) {
+    &:is(:not(:nth-last-child(2))) {
+      margin-bottom: 0.8rem;
+    }
+  }
+}
